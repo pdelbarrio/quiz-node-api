@@ -1,0 +1,29 @@
+{
+  "name": "quiz-node-api",
+  "version": "1.0.0",
+  "description": "API for the quiz app",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pdelbarrio/quiz-node-api.git"
+  },
+  "author": "pablo.lol",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pdelbarrio/quiz-node-api/issues"
+  },
+  "homepage": "https://github.com/pdelbarrio/quiz-node-api#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^6.8.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
