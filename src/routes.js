@@ -3,7 +3,14 @@ const router = express.Router();
 const Question = require("../models/question.model");
 
 //get all quiz questions
-router.get("/questions", (req, res) => {});
+router.get("/questions", async (req, res) => {
+  try {
+    const questions = await Question.find();
+    return res.status(200).json(questions);
+  } catch (error) {
+    return res.status(500).json({ error: error });
+  }
+});
 
 //get one quiz question
 router.get("/questions/:id", (req, res) => {});

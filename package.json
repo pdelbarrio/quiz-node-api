@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "API for the quiz app",
   "scripts": {
+    "start": "node src/server.js",
     "dev": "nodemon src/server.js",
+    "build": "echo 'Build'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
