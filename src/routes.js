@@ -19,12 +19,8 @@ router.get("/questions/:id", (req, res) => {});
 //create one quiz question
 router.post("/questions", async (req, res) => {
   try {
-    // const { description } = req.body;
-    // const { alternatives } = req.body;
     const { ...info } = req.body;
-    // const {} = req.body;
-    console.log(info);
-
+    // console.log(info);
     const question = await Question.create({
       ...info,
     });
@@ -71,9 +67,6 @@ router.post("/login", (req, res) => {
       res.status(404).json({ error: "User not found" });
       //password is correct
     } else {
-      // Successful login
-      // req.session.user = user; // store user data in session
-      // res.redirect("/admin.html");
       res.json(user);
     }
   });

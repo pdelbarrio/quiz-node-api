@@ -1,22 +1,5 @@
 const mongoose = require("mongoose");
 
-const QuestionSchemaOLD = new mongoose.Schema({
-  description: String,
-  alternatives: [
-    {
-      text: {
-        type: String,
-        required: true,
-      },
-      isCorrect: {
-        type: Boolean,
-        required: true,
-        default: false,
-      },
-    },
-  ],
-});
-
 const QuestionSchema = new mongoose.Schema({
   category: String,
   type: {
