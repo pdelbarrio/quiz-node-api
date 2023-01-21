@@ -1,7 +1,10 @@
 const mongoose = require("mongoose");
 
 const QuestionSchema = new mongoose.Schema({
-  category: String,
+  category: {
+    type: String,
+    default: "Web Development",
+  },
   type: {
     type: String,
     default: "multiple",
