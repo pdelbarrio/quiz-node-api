@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Question = require("../models/question.model");
 const User = require("../models/user.model");
+const Highscore = require("../models/highscore.model");
 
 //get all quiz questions
 router.get("/questions", async (req, res) => {
@@ -72,12 +73,37 @@ router.post("/login", (req, res) => {
   });
 });
 
-const checkAdmin = (req, res, next) => {
-  const user = req.session.user;
-  if (!user || !user.isAdmin) {
-    return res.status(401).redirect("/");
+//Highscore routes
+router.get("/highscore", async (req, res) => {
+  try {
+    const highscore = await Highscore.find();
+    return res.status(200).json(highscore);
+  } catch (error) {
+    return res.status(500).json({ error: error });
   }
-  next();
-};
+});
+
+router.post("/highscore", async (req, res) => {
+  try {
+    const { ...info } = req.body;
+    // console.log(info);
+    const highscore = await Highscore.create({
+      ...info,
+    });
+
+    return res.status(201).json(highscore);
+  } catch (error) {
+    return res.status(500).json({ error: error });
+  }
+});
+
+//Este middleware al final no se usa
+// const checkAdmin = (req, res, next) => {
+//   const user = req.session.user;
+//   if (!user || !user.isAdmin) {
+//     return res.status(401).redirect("/");
+//   }
+//   next();
+// };
 
 module.exports = router;
