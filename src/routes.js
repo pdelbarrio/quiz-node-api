@@ -3,6 +3,7 @@ const router = express.Router();
 const Question = require("../models/question.model");
 const User = require("../models/user.model");
 const Highscore = require("../models/highscore.model");
+const Score = require("../models/score.model");
 
 //get all quiz questions
 router.get("/questions", async (req, res) => {
@@ -21,7 +22,7 @@ router.get("/questions/:id", (req, res) => {});
 router.post("/questions", async (req, res) => {
   try {
     const { ...info } = req.body;
-    // console.log(info);
+    console.log(info);
     const question = await Question.create({
       ...info,
     });
@@ -73,11 +74,26 @@ router.post("/login", (req, res) => {
   });
 });
 
-//Highscore routes
+//Highscore routes, get and delete
 router.get("/highscore", async (req, res) => {
   try {
-    const highscore = await Highscore.find();
+    const highscore = await Score.find();
+    console.log(highscore);
+    await Score.deleteMany();
     return res.status(200).json(highscore);
+    //TODO:Array of Highscore must be removed each time deleteMany()
+  } catch (error) {
+    return res.status(500).json({ error: error });
+  }
+});
+
+//this route is to show highscore, doesent delete it
+router.get("/showhighscore", async (req, res) => {
+  try {
+    const highscore = await Score.find();
+    console.log(highscore);
+    return res.status(200).json(highscore);
+    //TODO:Array of Highscore must be removed each time deleteMany()
   } catch (error) {
     return res.status(500).json({ error: error });
   }
@@ -85,17 +101,29 @@ router.get("/highscore", async (req, res) => {
 
 router.post("/highscore", async (req, res) => {
   try {
-    const { ...info } = req.body;
-    // console.log(info);
-    const highscore = await Highscore.create({
-      ...info,
-    });
-
-    return res.status(201).json(highscore);
+    const scores = req.body; // array of scores
+    console.log("scores", scores);
+    const highscores = await Score.create(scores); // insert multiple documents
+    console.log("highscore to add to db", highscores);
+    return res.status(201).json(highscores);
   } catch (error) {
     return res.status(500).json({ error: error });
   }
 });
+
+// router.post("/highscore", async (req, res) => {
+//   try {
+//     const { ...info } = req.body;
+//     console.log(info);
+//     const highscore = await Score.create({
+//       ...info,
+//     });
+
+//     return res.status(201).json(highscore);
+//   } catch (error) {
+//     return res.status(500).json({ error: error });
+//   }
+// });
 
 //Este middleware al final no se usa
 // const checkAdmin = (req, res, next) => {
