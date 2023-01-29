@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const Question = require("../models/question.model");
 const User = require("../models/user.model");
-const Highscore = require("../models/highscore.model");
 const Score = require("../models/score.model");
 
 //get all quiz questions
