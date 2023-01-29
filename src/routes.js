@@ -73,7 +73,7 @@ router.post("/login", (req, res) => {
   });
 });
 
-//Highscore routes, get and delete
+//Highscore routes, delete after get
 router.get("/highscore", async (req, res) => {
   try {
     const highscore = await Score.find();
